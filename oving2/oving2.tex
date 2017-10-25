@@ -1,0 +1,877 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc}
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{tabularx}
+\usepackage{geometry}
+\usepackage{makecell}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{NTNU} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge TDT4138 - Assignment 2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Sondre Løvhaug} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section{Models and Entailment in Propositional Logic}
+
+\begin{enumerate}
+	\item 
+	For each statement below, determine whether the statement is true or false by building the complete
+	model table.
+	
+
+	
+	\begin{enumerate}
+		\item % A
+		$\neg A \wedge \neg B \models \neg B$
+
+		\begin{tabular}{l c c c c c c}
+		\hline 
+		A & B & $\neg A $ & $ \neg B $ & $ \neg A \wedge \neg B $ & $ \neg A \wedge \neg B \Rightarrow \neg B $ \\
+		\hline
+		false & false & true & true & true & true \\
+		false & true & true & false & false & true \\
+		true & false & false & true & false & true \\
+		true & true & false & false & false & true \\
+		\end{tabular}
+		\\
+
+		The statement is true, this because in every case where $\neg A \wedge \neg B$ is true, $\neg B$ is also true.\\
+
+		\item % B
+		$\neg A \vee \neg B \models \neg B$
+
+		\begin{tabular}{l c c c c c c}
+			\hline 
+			A & B & $\neg A $ & $ \neg B $ & $ \neg A \vee \neg B $ & $ \neg A \vee \neg B \Rightarrow \neg B $ \\
+			\hline
+			false 	& false 	& true 		& true 		& true 		& true \\
+			false 	& true 		& true 		& false 	& true 		& false \\
+			true 	& false 	& false 	& true 		& true 		& true \\
+			true 	& true 		& false 	& false 	& false 	& true \\
+		\end{tabular}
+		\\
+		
+		The statement is false, this because not all models are true.\\
+		
+		\item % C
+		
+		$\neg A \wedge B \models A \vee B$
+
+		\begin{tabular}{l c c c c c c}
+			\hline 
+			A & B & $\neg A $ & $ \neg A \wedge B $ & $ A \vee B $ & $ \neg A \wedge B \Rightarrow A \vee B $ \\
+			\hline
+			false 	& false 	& true 		& false 	& false 	& true \\
+			false 	& true 		& true 		& true	 	& true 		& true \\
+			true 	& false 	& false 	& false 	& true 		& true \\
+			true 	& true 		& false 	& false 	& true 		& true \\
+		\end{tabular}
+		\\
+		
+		The statement is true, this because not all models are true.\\
+		
+		\item % D
+		$A \Rightarrow B \models A \Leftrightarrow B$
+
+		\begin{tabular}{l c c c c c c}
+			\hline 
+			A & B & $A \Rightarrow B$ & $ A \Leftrightarrow B $ & $\Rightarrow B \Rightarrow A \Leftrightarrow B $ \\
+			\hline
+			false 	& false 	& true 		& true 		& true  \\
+			false 	& true 		& true 		& false	 	& false 	 \\
+			true 	& false 	& false 	& false 	& true 	 \\
+			true 	& true 		& true	 	& true 		& true 	 \\
+		\end{tabular}
+		\\
+		
+		The statement is false, this because not all models are true.\\
+		
+		\item % E
+		$(A \Rightarrow B) \Leftrightarrow C \models A \vee \neg B \vee C$
+
+		\begin{tabular}{l c c c c c c}
+			\hline 
+			A & B & C & $(A \Rightarrow B) \Leftrightarrow C$ & $A \vee \neg B \vee C$ & $(A \Rightarrow B) \Leftrightarrow C \Rightarrow A \vee \neg B \vee C$ \\
+			\hline
+			false 	& false 	& false 	& false 	& true 		& true \\
+			false 	& false 	& true 		& true	 	& true 		& true \\
+			false 	& true 		& false 	& false 	& false 	& true \\
+			false 	& true 		& true 		& true 		& true 		& true \\
+			true 	& false 	& false 	& true 		& true 		& true \\
+			true 	& false 	& true 		& false	 	& true 		& true \\
+			true 	& true 		& false 	& false 	& true 		& true \\
+			true 	& true 		& true 		& true 		& true 		& true \\
+		\end{tabular}
+		\\
+		
+		The statement is true, this because all models are true. \\
+		
+		\item 
+		$(\neg A \Rightarrow \neg B) \wedge (A \wedge \neg B)$ is satisfiable.
+
+		\begin{tabular}{l c c c c c c c}
+			\hline 
+			A & B & $\neg A$ & $\neg B$ & $(\neg A \Rightarrow \neg B)$ & $(A \wedge \neg B)$ & $(\neg A \Rightarrow \neg B) \wedge (A \wedge \neg B)$ \\
+			\hline
+			false 	& false 	& true 		& true 		& true  	&false		&false \\
+			false 	& true 		& true 		& false	 	& false 	&false		&false \\
+			true 	& false 	& false 	& true 		& true 	 	&true		&true\\
+			true 	& true 		& false	 	& false		& true 	 	&false		&false\\
+		\end{tabular}
+		\\
+		
+		The statement is satisfiable, this because some models are true. \\
+		
+		\item 
+		$(\neg A \Leftrightarrow \neg B) \wedge (A \wedge \neg B)$ is satisfiable.
+
+		\begin{tabular}{l c c c c c c c}
+			\hline 
+			A & B & $\neg A$ & $\neg B$ & $(\neg A \Rightarrow \neg B)$ & $(A \wedge \neg B)$ & $(\neg A \Rightarrow \neg B) \wedge (A \wedge \neg B)$ \\
+			\hline
+			false 	& false 	& true 		& true 		& true  	&false		&false \\
+			false 	& true 		& true 		& false	 	& false 	&false		&false \\
+			true 	& false 	& false 	& true 		& false 	&true		&false\\
+			true 	& true 		& false	 	& false		& true 	 	&false		&false\\
+		\end{tabular}
+		\\
+		
+		The statement is not satisfiable, this because no models are true.
+	\end{enumerate}
+	
+
+	\item 
+	Consider a logical knowledge base with 100 variables, $ A_1, A_2, . . . , A_100.$ This will have $Q =2^{100}$
+	possible models. For each logical sentence below, give the number of models that satisfy it.\\
+
+	Feel free to express your answer as a fraction of Q (without writing out the whole number
+	$1267650600228229401496703205376 = 2^{100})$ or to use other symbols to represent large numbers. \\
+
+	Example: The logical sentence A1 will be satisfied by $ \frac{1}{2}Q = \frac{1}{2}2^{100} = 2^{99}$ models.\\
+
+	\begin{enumerate}
+		\item 
+		$\neg A_{38} \wedge \neg A_{49}$
+
+		\begin{tabular}{l c c}
+			\hline
+			$A_{38}$ & $A_{49}$ & $\neg A_{38} \wedge \neg A_{49}$ \\
+			\hline
+			true 	& true 	&false\\
+			true 	& false &false\\
+			false 	& true  &false\\
+			false 	& false &true\\
+		\end{tabular}
+		\\
+		
+		We notice that in only one case will the model be true. $\frac{1}{4}Q = \frac{1}{4}2^{100} = 2^{-2} \times 2^{100} = 2^{98}$ models.
+
+		\item % B
+		$\neg A_{27} \wedge \neg A_{46} \wedge A_{57}$
+
+		\begin{tabular}{c c c c}
+			\hline
+			$A_{27}$ & $A_{46}$ & $ A_{57}$ & $\neg A_{27} \wedge \neg A_{46} \wedge A_{57}$ \\
+			\hline
+			true 	& true 		&true	&false\\
+			true 	& true 		&false	&false\\
+			true 	& false  	&true	&false\\
+			true 	& false 	&false	&false\\
+			false 	& true 		&true	&false\\
+			false 	& true 		&false	&false\\
+			false 	& false  	&true	&true\\
+			false 	& false 	&false	&false\\
+		\end{tabular}
+		\\
+		
+		We notice that in only one case will the model be true. $\frac{1}{8}Q = \frac{1}{8}2^{100} = 2^{-3} \times 2^{100} = 2^{97}$ models.
+		
+		\item % C
+		$\neg A_{27} \wedge ( A_{46} \wedge \neg A_{57})$
+
+		\begin{tabular}{c c c c}
+			\hline
+			$A_{27}$ & $A_{46}$ & $ A_{57}$ & $A_{27} \wedge (A_{46} \vee \neg A_{57})$ \\
+			\hline
+			true 	& true 		&true	&true\\
+			true 	& true 		&false	&true\\
+			true 	& false  	&true	&true\\
+			true 	& false 	&false	&false\\
+			false 	& true 		&true	&false\\
+			false 	& true 		&false	&false\\
+			false 	& false  	&true	&false\\
+			false 	& false 	&false	&false\\
+		\end{tabular}
+		\\
+
+		$\frac{3}{8}Q = \frac{3}{8}2^{100} = 3 \times 2^{-3} \times 2^{100} = 3 \times 2^{97}$ models. \\
+		
+		\item % D
+		$\neg A_{85} \Rightarrow \neg A_{91}$
+
+		\begin{tabular}{c c c}
+			\hline
+			$A_{85}$ & $A_{91}$ & $\neg A_{85} \Rightarrow A_{91}$\\
+			\hline
+			true 	& true 		&true\\
+			true 	& false 	&false\\
+			false 	& true  	&true\\
+			false 	& false 	&true\\
+		\end{tabular}
+		\\
+
+		$\frac{3}{4}Q = \frac{3}{4}2^{100} = 3 \times 2^{-2} \times 2^{100} = 3 \times 2^{98}$ models.
+		\\
+		
+		\item % E
+		$(\neg A_{14} \Leftrightarrow \neg A_{19}) \wedge (A_{21} \Rightarrow A_{22})$
+
+		\begin{tabular}{c c c c c c}
+			\hline
+			$A_{14}$ & $A_{19}$ & $A_{21}$ & $A_{22}$ & $(\neg A_{14} \Leftrightarrow \neg A_{19}) \wedge (A_{21} \Rightarrow A_{22})$ \\
+			\hline
+			true 	& true 		& true 		& true		& true\\
+			true 	& true 		& true 		& false		& true\\
+			true 	& true 		& false 	& true		& false\\
+			true 	& true 		& false 	& false		& true\\
+			true 	& false 	& true 		& true		& false\\
+			true 	& false 	& true 		& false		& false\\
+			true 	& false 	& false 	& true		& false\\
+			true 	& false 	& false 	& false		& false\\
+			false 	& true 		& true 		& true		& false\\
+			false 	& true 		& true 		& false		& false\\
+			false 	& true 		& false 	& true		& false\\
+			false 	& true 		& false 	& false		& false\\
+			false 	& false 	& true 		& true		& true\\
+			false 	& false 	& true 		& false		& false\\
+			false 	& false 	& false 	& true		& true\\
+			false 	& false 	& false 	& false		& true\\
+		\end{tabular}
+		\\
+
+		$\frac{6}{16}Q = \frac{6}{16}2^{100} = 6 \times 2^{-4} \times 2^{100} = 6 \times 2^{96}$ models. \\
+		
+		\item % F
+		$A_{41} \wedge \neg A_{59} \wedge A_{64} \wedge \neg A_{85} \wedge A_{87} \wedge \neg A_{90}$
+		\\
+		
+		We notice that all since this models is all \textit{and} statements every variable has to be true. We therefore have $2^{6} = 64$ solutions and only $\frac{1}{61}$ will be true.
+		We then get $\frac{1}{64}Q = \frac{1}{64}2^{100} = 2^{-6} \times 2^{100} = 2^{94}$
+	\end{enumerate}
+	\item 
+	Wompus shit \\
+	\begin{tabular}{c c c c c}
+		\hline
+		3.1 & 3.2 & 3.3 & 4.4 & $3.1 \wedge \neg 3.2 \wedge (3.3 \vee 4.4)$ \\
+		\hline
+		true 	& true 		& true 		& true		& false\\
+		true 	& true 		& true 		& false		& false\\
+		true 	& true 		& false 	& true		& false\\
+		true 	& true 		& false 	& false		& false\\
+		true 	& false 	& true 		& true		& true\\
+		true 	& false 	& true 		& false		& true\\
+		true 	& false 	& false 	& true		& true\\
+		true 	& false 	& false 	& false		& false\\
+		false 	& true 		& true 		& true		& false\\
+		false 	& true 		& true 		& false		& false\\
+		false 	& true 		& false 	& true		& false\\
+		false 	& true 		& false 	& false		& false\\
+		false 	& false 	& true 		& true		& false\\
+		false 	& false 	& true 		& false		& false\\
+		false 	& false 	& false 	& true		& false\\
+		false 	& false 	& false 	& false		& false\\
+	\end{tabular}
+
+	From the model table we get 3 worlds:
+
+	w1 = P[3.1, 3.3, 4.4]\\
+	w2 = P[3.1, 3.3]\\
+	w3 = P[3.1, 4.4]\\
+
+	Sentences to check:\\
+	$\alpha_1$ = \text{"There is no pit in [3.2]"}\\
+	$\alpha_2$ = \text{"There is a pit in [4.4]"}\\
+	$\alpha_3$ = \text{"There is no pit in [4.4]"}\\
+	$\alpha_4$ = \text{"There is a pit in [3.3] or [4.4]"}\\
+	
+
+	\begin{tabular}{c | c c c c}
+		\hline
+		 & $\alpha_1$ & $\alpha_2$ & $\alpha_3$ & $\alpha_4$ \\
+		\hline
+		w1	&true	&true	&false	&true \\
+		w2	&true	&false	&true	&true \\
+		w3 	&true	&true	&false	&true
+	\end{tabular}
+
+	Based on the knowledge base we can no specify that $\textit{KB} \models \alpha_1$ and $\textit{KB} \models \alpha_4$.
+
+\end{enumerate}
+
+\section{Resolution in Propositional Logic}
+
+\begin{enumerate}
+	\item
+	Convert each of the following sentences to Conjunctive Normal Form (CNF).
+	\begin{enumerate}
+		\item 
+		$A \vee (B \wedge C \wedge \neg D)$
+		\\Distribute:\\
+		$(A \vee B) \wedge (A \vee C) \wedge (A \vee \neg D)$
+
+		\item
+		$\neg(A \Rightarrow \neg B) \wedge \neg (C \Rightarrow \neg D)$
+		\\Eliminate $\Rightarrow$:\\
+		$\neg (\neg A \vee \neg B) \wedge \neg(\neg C \vee \neg D)$
+		\\Move $\neg$ inwards:\\
+		$(A \wedge B) \wedge (C \wedge D)$
+		\\Remove parenthesis:\\
+		$A \wedge B \wedge C \wedge D$
+
+		\item
+		$\neg((A \Rightarrow B) \wedge (C \Rightarrow D))$
+		\\Eliminate $\Rightarrow$:\\
+		$\neg((\neg A \vee B) \wedge (\neg C \vee D))$
+		\\Move $\neg$ inwards:\\
+		$\neg(\neg A \vee B) \vee \neg(\neg C \vee D)$
+		\\Move $\neg$ inwards:\\
+		$(A \wedge \neg B) \vee (C \wedge \neg D)$
+		\\Distribute:\\
+		$((A \wedge \neg B) \vee C) \wedge ((A \wedge \neg B) \vee \neg D)$
+		\\Distribute:\\
+		$((A \vee C) \wedge (\neg B \vee C)) \wedge ((A \vee \neg D) \wedge (\neg B \vee \neg D))$
+		\\Remove paranthesis:\\
+		$(A \vee C) \wedge (\neg B \vee C) \wedge (A \vee \neg D) \wedge (\neg B \vee \neg D)$
+
+		\item 
+		$(A \wedge B) \vee (C \Rightarrow D)$
+		\\Eliminate $\Rightarrow$:\\
+		$(A \wedge B) \vee (\neg C \vee D)$
+		\\Distribute:\\
+		$((\neg C \vee D) \vee A) \wedge ((\neg C \vee D) \vee B))$
+		\\Remove parenthesis:\\
+		$(\neg C \vee D \vee A) \wedge (\neg C \vee D \vee B)$
+		
+		\item
+		$A \Leftrightarrow (B \Rightarrow \neg C)$
+		\\Eliminate $\Leftrightarrow$:\\
+		$(A \Rightarrow (B \Rightarrow \neg C)) \wedge ((B \Rightarrow \neg C) \Rightarrow A)$
+		\\Eliminate $\Rightarrow$:\\
+		$(\neg A \vee (\neg B \vee \neg C)) \wedge (\neg(\neg B \vee \neg C) \vee A)$
+		\\deMorgan:\\
+		$(\neg A \vee (\neg B \vee \neg C)) \wedge ((B \wedge C) \vee A)$
+		\\Distribute:\\
+		$(\neg A \vee (\neg B \vee \neg C)) \wedge ((B \vee A) \wedge (C \vee A))$
+		\\Remove parenthesis:\\
+		$(\neg A \vee \neg B \vee \neg C) \wedge (B \vee A) \wedge (C \vee A)$
+	\end{enumerate}
+	
+	\item
+	Consider the following Knowledge Base (KB):
+	\begin{enumerate}
+		\item $(D \wedge E) \Rightarrow C)$
+		\item $\neg A \Rightarrow \neg B$
+		\item $\neg C \wedge E$
+		\item $\neg D \Rightarrow B$
+	\end{enumerate}
+	First we convert the KB to CNF:
+	\begin{enumerate}
+		\item
+		$C \vee \neg D \vee \neg E$
+		\item
+		$A \vee \neg B$
+		\item
+		$\neg C \wedge E$
+		\item
+		$B \vee D$
+	\end{enumerate}
+
+	Then we negate our desired conclusion:\\
+	$KB \models A = KB \models \neg A$ \\
+	
+	\begin{tabular}{lll}
+	Step & Formula                     & Derivation         \\
+	1    & $C \vee \neg D \vee \neg E$ & Given              \\
+	2    & $A \vee \neg B$             & Given              \\
+	3    & $\neg C$                    & Given              \\
+	4    & E                           & Given              \\
+	5    & $B \vee D$                  & Given              \\
+	6    & $\neg A$                    & Negated conclusion \\
+	\hline
+	7    & $C \vee \neg D$             & Resolution rule: 1,4\\
+	8    & $\neg D$                    & Resolution rule: 7,3\\
+	9    & $B$                         & Resolution rule: 5,8\\
+	10   & A                           & Resolution rule: 2,9\\
+	11   & $\blacksquare$              & Resolution rule: 10,6\\               
+	\end{tabular}
+
+	\item
+	Exercise 7.18 from the textbook. With the sentence:
+	$$(\neg Party \Rightarrow \neg(Food \vee Drinks)) \Rightarrow (Food \Rightarrow Party)$$
+
+	\begin{enumerate}
+		\item
+		Determine, using enumeration, whether this sentence is valid, satisfiable (but not valid),
+		or unsatisfiable.
+
+		\begin{tabular*}{\textwidth}{c c c c}
+			Party & Food & Drinks & $(\neg Party \Rightarrow \neg(Food \vee Drinks)) \Rightarrow (Food \Rightarrow Party)$ \\
+			\hline
+			true	& true	& true	& true		\\
+			true	& true	& false	& true 		\\
+			true	& false	& true	& true		\\
+			true	& false	& false	& true		\\
+			false	& true	& true	& true		\\
+			false	& true	& false	& true		\\
+			false	& false	& true	& true		\\
+			false	& false	& false	& true		\\
+			
+		\end{tabular*}\\
+		
+		The sentence is valid because all of the models are true.\\
+		
+		\item
+		Convert the left-hand and right-hand sides of the main implication into CNF, showing each step, and explain how the results confirm your answer to (a).
+		\\
+		
+		Converting both sides to CNF:\\
+		
+		Left:\\
+		$(\neg Party \Rightarrow \neg(Food \vee Drinks))$
+		\\
+		
+		Eliminate $\Rightarrow$: \\
+		$(Party \vee \neg(Food \vee Drinks))$
+		\\
+		
+		DeMorgan on $\neg$: \\
+		$(Party \vee \neg(\neg Food \wedge \neg Drinks))$		
+		\\
+		
+		Distribute $\wedge over \vee$: \\
+		$(Party \vee \neg Food) \wedge (Party \vee \neg Drinks)$
+		\\
+		
+		
+		Right:\\
+		$Food \Rightarrow Party$
+		\\
+		
+		Eliminate $\Rightarrow$:\\
+		$\neg Food \vee Party$
+		\\
+
+		If left side is true, then the right side must also be true. Therefore we can conclude that this sentence is valid.\\
+		\\
+		\item
+		Prove your answer to (a) using resolution.
+
+		To prove the resolution we prove by contradiction that: $(Party \vee \neg Food) \wedge (Party \vee \neg Drinks) \Rightarrow (Food \vee Party)$ is unsatisfible.\\
+		
+		We do this by saying that the right side implies negative left side:\\
+		$\neg Food \vee Party$ Becomes: $\neg(\neg Food \vee Party)$\\
+		
+		DeMorgan:\\
+		
+		$Food \wedge \neg Party$\\
+
+
+		\begin{tabular}{lll}
+		Step & Formula                     	& Derivation         \\
+		1    & $Party \vee \neg Food$ 		& Given              \\
+		2    & $Party \vee \neg Drinks$     & Given              \\
+		3    & $Food$       				& Negated              \\
+		4    & $\neg Party$       			& Negated              \\
+		\hline
+		5    & $P$             & Resolution rule: 1,3\\
+		6   & $\blacksquare$              & Resolution rule: 5, 4\\               
+		\end{tabular}
+		
+		\end{enumerate}
+	\end{enumerate}
+
+\section{Representations in First-Order Logic}
+
+\begin{enumerate}
+	\item
+	Consider a vocabulary with the following symbols:\\
+
+	$Occupation(p, o):$ Predicate person $p$ has Occupation $o$.\\
+	$Customer (p1, p2):$ Predicate. Person $p1$ is a customer of person $p2$.\\
+	$Boss (p1, p2):$ Predicate. Person $p1$ is a boss of person $p2$.\\
+	$Doctor, Surgeon, Lawyer, Actor:$ Constants denoting occupations.\\
+	$Emily, Joe$: Constants denoting people.\\
+	
+	Use these symbols to write the following assertions in first-order logic:
+	\begin{enumerate}
+		\item
+		Emily is either a surgeon or a lawyer.
+
+		$Occupation(Emily, Surgeon) \vee Occupation(Emily, Lawyer)$\\
+		
+		\item
+		Joe is an actor, but he also holds another job.
+
+		$Occupation(Joe, Actor) \wedge Occupation(Joe, Other)$\\
+		
+		\item
+		All surgeons are doctors.
+
+		$\forall Surgeon, Occupation(Surgeon, Doctor)$\\
+		
+		\item
+		Joe does not have a lawyer (i.e., is not a customer of any lawyer).
+
+		$\neg Customer(Joe, Lawyer)$\\
+		
+		\item
+		Emily has a boss who is a lawyer.
+
+		$Boss(Lawyer, Emily)$\\
+		
+		\item
+		There exists a lawyer all of whose customers are doctors.
+
+		$\exists Lawyer, \forall Customer(Doctor, Lawyer)$\\
+		
+		\item
+		Every surgeon has a lawyer.
+
+		$\forall Surgeon, Customer(Surgeon, Lawyer)$\\
+		
+	\end{enumerate}
+
+	\item
+	Consider a first-order logical knowledge base that describes worlds containing movies, actors, direc-
+	tors and characters. The vocabulary contains the following symbols:\\
+	
+	PlayedInMovie(a,m): predicate. Actor/person $a$ played in the movie $m$\\
+	PlayedCharacter(a,c): predicate. Actor/person $a$ played character $c$\\
+	CharacterInMovie(c,m): predicate. Character $c$ is in the movie $m$.\\
+	Directed(p,m): person $p$ directed movie $m$.\\
+	Male(p): $p$ is male\\
+	Female(p): $p$ is female\\
+	Constants related to the name of the movie, person or character with obvious meaning (to simplify you may use the surname or abbreviation).\\
+
+	Express the following statements in First-Order Logic:\\
+	\begin{enumerate}
+		\item
+		The character “Batman” was played by Christian Bale, George Clooney and Val Kilmer.
+		
+		$PlayedCharacter(Christian Bale, Batman)$ $\wedge$ $PlayedCharacter(George Clooney, Batman)$ $\wedge$ $PlayedCharacter(Val Kilmer, Batman)$\\
+		
+		\item
+		The character “Batman” was played by male actors.
+
+		$\forall$ $PlayerCharacter(male(p), Batman)$\\
+		
+		\item
+		The character “Batwoman” was played by female actresses.
+		
+		$\forall$ $PlayerCharacter(female(p), Batwoman)$\\
+
+		\item
+		Heath Ledger and Christian Bale did not play the same characters.
+
+		$PlayerCharacter(Heath Ledger, c)$ $\wedge$ $\neg(PlayedCharacter(Christian Bale, c)$\\
+				
+		\item
+		In all “Batman” movies directed by Christopher Nolan, Christian Bale played the character Bat-
+		man (tip: note that in this case Batman is a character of the movie, not the name of the movie).
+
+		$\forall$ $Directed(Christopher Nolan, Batman)$, $PlayedCharacter(Christian Bale, Batman)$\\
+		
+		\item
+		The Joker and Batman are characters that appear together in some movies.
+
+		$\exists$ movie $m$, $CharacterInMovie(Batman, m)$ $\wedge$ $CharacterInMovie(Joker, m)$\\
+		
+		\item
+		Kevin Costner directed and starred in the same movie.
+
+		$Directed(KevinCostner, m)$ $\wedge$ $PlayedInMovie(KevinCostner, m)$\\
+		
+		\item
+		George Clooney and Tarantino never played in the same movie and Tarantino never directed a film that George Clooney played.
+		
+		$\forall$ $PlayedInMovie(GeorgeClooney, m)$, $\neg PlayedInMovie(Tarantino, m)$ $\wedge$ $\neg Directed(Tarantino, m)$\\
+		\item
+		Uma Thurman is female actress who played a character in some movies directed by Tarantino.
+
+		$\exists$ $Directed(Tarantino,m)$, $Female(UmaThurman)$ $\wedge$ $PlayedInMovie(UmaThurman, m)$\\
+
+	\end{enumerate}
+
+	\item
+	\begin{enumerate}
+
+		\item
+		An integer number $x$ is divisible by $y$ if there is some integer $z$ less than $x$ such that $x = z \times y$ (in other words, define the predicate $Divisible(x, y)$).\\
+		
+		$\exists x,y,z ((z < x) \land (z \in \mathbb{Z}) \land (x = z \times y)) \Leftrightarrow Divisible(x,y)$\\
+		
+		\item
+		A number is even if and only if it is divisible by 2 (define the predicate $Even(x)$).\\
+		
+		$Divisible(x, 2) \Rightarrow Even(x)$\\
+
+		\item
+		An odd number is not divisible by 2 (define the predicate $Odd(x)$.\\
+		
+		$\neg Divisible(x, 2) \Rightarrow Odd(x)$\\
+
+		\item
+		The result of summing an even number with 1 is an odd number (define the predicate $Odd(x)$).\\
+		
+		$\forall x Even(x) \Leftrightarrow Odd(x+1)$\\
+
+		\item
+		A prime number is divisible only by itself (define the predicate $Prime(x)$).\\
+
+		$\exists \,x \, \forall \,y \; ((Prime(x) \land Even(x)) \land (Prime(y) \land Even(y))) \Rightarrow (x = y)$\\
+
+		\item
+		There is only one even prime number.\\
+		
+		$\exists x \forall y ((Prime(x) \wedge Even(x)) \wedge (Prime(y) \wedge Even(y))) \Rightarrow (x = y)$\\
+
+		\item
+		Every integer number is equal to a product of prime numbers. (you can use $\prod^k_{i=1} pk$ to express a product of numbers, or use . . . to express a repeating pattern, like $p1,..., pn$, meaning $p1, p2, p3$ until $pn$).\\
+		
+		$ \forall \, x \, \exists \, p_1,...,p_n \, \; (Prime(p_1) \land ... \land Prime(p_n)) \Rightarrow x = \prod_{i=1}^n p_i$
+
+	\end{enumerate}
+	
+\end{enumerate}
+
+\section{Resolution in First-Order Logic}
+\begin{enumerate}
+	\item
+	Find the unifier $(\theta)$ – if possible – for each pair of atomic sentences. Here, $Owner(x, y)$, $Horse(x)$ and $Rides(x,y)$ are predicates, while $FastestHorse(x)$ is a function that maps a person to the name of their fastest horse:
+
+	\begin{enumerate}
+		\item %A
+		Horse(x) ... Horse(Rocky)\\
+		Answer: $\theta = \{x/Rocky\}$\\
+		
+		\item %B
+		Owner(Leo, Rocky) ... Owner(x, y)\\
+		Answer: $\theta = \{ x/Leo, y/Rocky\}$\\
+
+		\item %C
+		Owner(Leo, x) ... Owner(y, Rocky)\\
+		Answer: $\theta = \{ x/Leo, y/Rocky\}$\\
+
+		\item %D
+		Owner(Leo, x) ... Rides(Leo, Rocky)\\
+		Answer: Impossible to unify.\\
+		
+		\item %E
+		Owner(x, FastestHorse(x)) ... Owner(Leo, Rocky)\\
+		Answer: $\theta = \{x/Leo\}$\\
+
+		\item %F
+		Owner(Leo, y) ... Owner(x, FastestHorse(x))\\
+		Answer: $\theta = \{x/Leo, y/FastestHorse(Leo)\}$\\
+
+		\item %G
+		Rides(Leo FastestHorse(x)) ... Rides(y, FastestHorse(Marvin))\\
+		Answer: $\theta = \{x/Marvin, y/Leo\}$
+
+	\end{enumerate}
+	\item
+	Using the predicates $Philosopher(x)$, $StudentOf(y,x)$, $Write(x,z)$, $Read(y,z)$ and $Book(z)$ perform
+	skolemization with the following expressions:
+	\begin{enumerate}
+		\item
+		$\exists x \exists y: Philosopher (x) \wedge StudentOf(y,x)$\\
+		$Philosopher(a) \wedge StudentOf(b,a)$\\
+		
+		\item
+		$\forall y,x: Philosopher(x) \wedge StudentOf(y,x) \rightarrow [\exists z: Book(z) \wedge Write(x,z) \wedge Read(y,z)]$\\
+		
+		Eliminate implication:\\
+		$\forall y,x: \neg Philosopher(x) \vee \neg StudentOf(y,x) \vee [\exists z: Book(z) \wedge Write(x,z) \wedge Read(y,z)]$\\
+
+		Skolemize: substitute $z$ by $h(x,y)$:\\
+		$\forall y,x: \neg Philosopher(x) \vee \neg StudentOf(y,x) \vee [Book(h(x,y)) \wedge Write(x,h(x,y)) \wedge Read(y,h(x,y))]$\\
+	\end{enumerate}
+	\item
+	Use resolution to prove SuperActor(Tarantino) given the information below. 
+	You must first convert each sentence into CNF. 
+	Feel free to show only the applications of the resolution rule that lead to the desired conclusion. 
+	For each application of the resolution rule, show the unification bindings, $\theta$. 
+	We are using in this case the same predicates of Exercise 3.1 (movies, actors, etc).
+	\begin{itemize}
+		\item 
+		$\forall x: SuperActor(x) \Leftrightarrow [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)]$
+		\item
+		$\forall m: Directed(Tarantino,m) \Leftrightarrow PlayedInMovie(UmaThurman,m)$
+		\item
+		$\exists m: PlayedInMovie(UmaThurman,m) \wedge PlayedInMovie(Tarantino,m)$
+	\end{itemize}
+	\begin{enumerate}
+		\item
+		Show all the steps in the proof (or the diagram).\\
+		
+			$\bullet \forall x: SuperActor(x) \Leftrightarrow [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)]$\\
+			Eliminate $\Leftrightarrow$:\\
+
+			$\forall x: (SuperActor(x) \Rightarrow [\exists m: PlayedInMovie(x,m)) \wedge Directed(x,m)]) \wedge \\
+			([\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)] \Rightarrow SuperActor(x))$\\
+			
+			Eliminate $\Rightarrow$:\\
+			$\forall x: (\neg SuperActor(x) \vee [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)]) \wedge \\
+			(\neg [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)] \vee SuperActor(x))$\\
+			
+			DeMorgan:\\
+			$\forall x: (\neg SuperActor(x) \vee [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)]) \wedge \\
+			([\exists m: \neg PlayedInMovie(x,m) \vee \neg Directed(x,m)] \vee SuperActor(x))$\\
+			
+			Substitute m:\\
+			$\forall x: (\neg SuperActor(x) \vee [PlayedInMovie(x,f(m)) \wedge Directed(x,f(m))]) \wedge \\
+			 ([\neg PlayedInMovie(x,f(m)) \vee \neg Directed(x,f(m))] \vee SuperActor(x))$\\
+			
+			Distribute:\\
+			$\forall x: (\neg SuperActor(x) \vee PlayedInMovie(x,f(m)) \wedge (SuperActor(x) \vee Directed(x,f(m))) \wedge \\
+			([\neg PlayedInMovie(x,f(m)) \vee \neg Directed(x,f(m))] \vee SuperActor(x))$\\
+			
+			Remove unified quantifiers:\\
+			$(\neg SuperActor(x) \vee PlayedInMovie(x,f(m)) \wedge (SuperActor(x) \vee Directed(x,f(m))) \wedge \\
+			([\neg PlayedInMovie(x,f(m)) \vee \neg Directed(x,f(m))] \vee SuperActor(x))$\\
+			
+			Remove parenthesis:\\
+			$(\neg SuperActor(x) \vee PlayedInMovie(x,f(m)) \wedge (SuperActor(x) \vee Directed(x,f(m)) \wedge \\
+			(\neg PlayedInMovie(x,f(m)) \vee \neg Directed(x,f(m))) \vee SuperActor(x)$\\
+
+
+			$\bullet \forall m: Directed(Tarantino,m) \Leftrightarrow PlayedInMovie(UmaThurman,m)$\\
+			
+			Eliminate $\Leftrightarrow$:\\
+			$\forall m: (Directed(Tarantino,m) \Rightarrow PlayedInMovie(UmaThurman,m)) \wedge \\
+			(PlayedInMovie(UmaThurman,m) \Rightarrow Directed(Tarantino,m))$\\
+			
+			Eliminate $\Rightarrow$:\\
+			$\forall m: (\neg Directed(Tarantino,m) \vee PlayedInMovie(UmaThurman,m)) \wedge \\
+			 (\neg PlayedInMovie(UmaThurman,m) \vee Directed(Tarantino,m))$\\
+			
+			Remove unified quantifiers:\\
+			$(\neg Directed(Tarantino,m) \vee PlayedInMovie(UmaThurman,m)) \wedge \\
+			(\neg PlayedInMovie(UmaThurman,m) \vee Directed(Tarantino,m))$\\
+
+			
+			$\bullet \exists m: PlayedInMovie(UmaThurman,m) \wedge PlayedInMovie(Tarantino,m)$\\
+		
+			Substitute m:\\
+			$PlayedInMovie(UmaThurman,f(m)) \wedge PlayedInMovie(Tarantino,f(m))$\\
+
+		\begin{table}[h]
+			\begin{tabular}{lll}
+				Step & Formula                     							& Derivation         \\
+				1   & $\neg SuperActor(x) \vee PlayedInMovie(x,f(m))$  		& Given              \\
+				2   & $SuperActor(x) \vee Directed(x,f(m))$             	& Given              \\
+				3   & $\neg PlayedInMovie(x,f(m)) \vee \neg Directed(x,f(m)) \vee SuperActor(x)$   & Given              \\
+				4   & $\neg Directed(Tarantino,m) \vee PlayedInMovie(UmaThurman,m))$         & Given              \\
+				5   & $\neg PlayedInMovie(UmaThurman,m) \vee Directed(Tarantino,m))$			& Given              \\
+				6   & $PlayedInMovie(UmaThurman,f(m))$                    	& Given \\
+				7   & $PlayedInMovie(Tarantino,f(m))$             			& Given\\
+				8   & $\neg SuperActor(Tarantino)$                    		& Negated conclusion\\
+				\hline
+				9   & $Directed(x, f(m))$    								& \makecell{Resolution rule: 5,6\\$\theta = \{y/UmaThurman\}$}\\
+				10  & $\neg PlayedInMovie(x,f(m)) \vee SuperActor(x)$      	& Resolution rule: 3,9\\
+				11  & $SuperActor(x)$										& Resolution rule: 7,10\\ 		      					
+				12 	& $SuperActor(Tarantino)$								& $\theta = \{x/Tarantino\}$ \\
+				13	& $\blacksquare$           								& Resolution rule: 12, 8
+			\end{tabular}
+	\end{table}
+
+	\end{enumerate}
+
+	\item
+	Translate the information given in FOL into English (or Norwegian) and describe in high level the reasoning you could apply in English to have the same result (in other words, describe a proof of the result in natural language).\\
+	\begin{itemize}
+		\item 
+		$\forall x: SuperActor(x) \Leftrightarrow [\exists m: PlayedInMovie(x,m) \wedge Directed(x,m)]$\\
+
+		A person is a super actor if and only if he or she played in, and directed the same movie.\\
+		
+		\item
+		$\forall m: Directed(Tarantino,m) \Leftrightarrow PlayedInMovie(UmaThurman,m)$\\
+		
+		Uma Thurman has played in every movie directed by Tarantino, and Tarantino has directed every movie Uma Thurman has played in.\\
+
+		\item
+		$\exists m: PlayedInMovie(UmaThurman,m) \wedge PlayedInMovie(Tarantino,m)$\\
+
+		There exists a movie in which bot Uma Thurman and Tarantino playes a role.\\
+		
+		Since there Tarantino has directed every movie Uma Thurman has played in, and there exists a movie where both Tarantino and Uma Thurman plays a role, then Tarantino must be a super actor.
+
+	\end{itemize}
+\end{enumerate}
+\end{document}

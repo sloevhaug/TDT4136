@@ -1,0 +1,110 @@
+
+----- PART 3 -----
+
+(x) - Open Nodes
+[x] - Closed Nodes
+X - Chosen path
+----- A* ALGORITHM -----
+
+File: ./boards/board-1-1.txt
+ .  .  .  .  .  .  .  . (.)(.)(.)(.)(.)(.)(.)(.)(.)(.) .  . 
+ .  .  .  .  .  .  . (.)[X][X][X][X][X][X][X][X][X][X](.) . 
+ .  .  .  .  .  .  . (.)[X] #  #  #  #  #  # (.)(.)[X](.) . 
+ .  .  .  .  .  . (.)[.][X][X][X] A [.][.] #  .  .  B  .  . 
+ .  .  .  .  .  .  . (.)[.] #  #  #  #  #  #  .  .  .  .  . 
+ .  .  .  .  .  .  .  . (.) .  .  .  .  .  .  .  .  .  .  . 
+ .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 
+
+
+File: ./boards/board-1-4.txt
+ A [X] #  .  .  .  .  .  .  .  #  .  .  .  .  .  .  #  .  . 
+ # [X] # (.) #  #  #  #  #  .  #  .  #  #  #  #  .  #  .  . 
+[X][X] # [X][X][X][X][X] #  .  #  .  .  .  .  #  .  .  .  . 
+[X] #  # [X] #  #  # [X] #  #  #  #  #  #  .  #  #  #  #  # 
+[X][X] # [X] B  # [X][X] #  .  .  .  .  #  .  .  .  #  .  . 
+ # [X] #  #  #  # [X] #  #  .  #  #  .  #  .  #  .  #  #  . 
+(.)[X][X][X][X][X][X][.](.) .  .  #  .  .  .  #  .  .  .  . 
+
+
+File: ./boards/board-2-4.txt
+ w  w  w  w (w)[g][g][g][g][g][g][g][g][g][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][g][r][r][r][r][r]
+ w  w  w  w  w (w)[w][g][g][g][g][g][g][g][X][g][g][g][g][g][g][g][g][g][g][g][g][g](w)(w)(w)(w)(w)[X][X][r][g][g][g][g]
+ w  w  w  w  w  w (w)[w][w][w][w][g][g][g] A [g][g][g][g][g][g][g][w](w)(w)(w)(w)(w) w  w  w  w  w (w)[X](w)[g][g][g][g]
+ w  w  w  w  w  w  w (w)(w)(w)(w)[w][w][w][w][w][w][w][w][w][w][w](w) w  w  w  w  w  w  w  w  w  w (w)[X](w)(w)(w)(w)(w)
+ w  w  w  w  w  w  w  w  w  w  w (w)(w)(w)(w)(w)(w)(w)(w)(w)(w)(w) w  w  w  w  w  w  w  w  w  w  w (w)[X](w) w  w  w  w 
+ w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w (w)(w)(w) w  w  w  w  w  w  w  w  w  w  w  w  w (w)[X][X](w) w  w  w  w 
+ w  w  w  w  w  w  w  w  g  g  g  g  g  B (g)(g)[g][g][g](w)(w)(w)(w)(w)(w) w  w  w  w  w  w  w (w)[X](w) w  w  w  w  w 
+ w  w  w  w  g  g  g  g  g (g)(f)(f)(f)[X][f][f][g][g][g][g][g][g][g][g][g](w)(w)(w)(w)(w)(w)(w)(w)[X](w) w  w  w  w  w 
+ w  w  g  g  g  g  f (f)(f)[f][f][f][f][X][f][f][f][f][f][f][g][g][g][g][g][g][g][g][g][g][g][g][X][X][g](w) w  w  w  w 
+ w  g  g  g  f  f (f)[r][r][r][r][r][r][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][g][g][g](g) g  g  g 
+
+
+----- DJIKSTRA -----
+
+File: ./boards/board-1-1.txt
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.]
+[.][.][.][.][.][.][.][.][X][X][X][X][X][X][X][X][X][X][.][.]
+[.][.][.][.][.][.][.][.][X] #  #  #  #  #  # [.][.][X][.][.]
+[.][.][.][.][.][.][.][.][X][X][X] A [.][.] # [.][.] B [.][.]
+[.][.][.][.][.][.][.][.][.] #  #  #  #  #  # [.][.][.][.][.]
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.]
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.]
+
+
+File: ./boards/board-1-4.txt
+ A [X] # [.][.][.][.][.][.][.] # [.][.][.][.][.][.] # [.][.]
+ # [X] # [.] #  #  #  #  # [.] # [.] #  #  #  # [.] # [.][.]
+[X][X] # [X][X][X][X][X] # [.] # [.][.][.][.] # [.][.][.][.]
+[X] #  # [X] #  #  # [X] #  #  #  #  #  # [.] #  #  #  #  # 
+[X][X] # [X] B  # [X][X] # [.][.][.][.] # [.][.][.] # [.][.]
+ # [X] #  #  #  # [X] #  # [.] #  # [.] # [.] # [.] #  # [.]
+[.][X][X][X][X][X][X][.][.][.][.] # [.][.][.] # [.][.][.][.]
+
+
+File: ./boards/board-2-4.txt
+ w  w  w (w)[w][g][g][g][g][g][g][g][g][g][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][r][r][r][r][r]
+ w  w  w  w (w)[w][w][g][g][g][g][g][g][g][X][g][g][g][g][g][g][g][g][g][g][g][g][g](w)(w)(w)(w)(w)[g][X][r][g][g][g][g]
+ w  w  w  w  w (w)(w)[w][w][w][w][g][g][g] A [g][g][g][g][g][g][g][w][w][w][w](w)(w) w  w  w  w  w (w)[X](w)[g][g][g][g]
+ w  w  w  w  w  w  w (w)(w)(w)(w)[w][w][w][w][w][w][w][w][w][w][w](w)(w)(w)(w) w  w  w  w  w  w  w (w)[X](w)(w)(w)(w)(w)
+ w  w  w  w  w  w  w  w  w  w  w (w)(w)(w)(w)(w)(w)(w)(w)(w)(w)(w) w  w  w  w  w  w  w  w  w  w  w (w)[X](w) w  w  w  w 
+ w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w (w)(w)(w) w  w  w  w  w  w  w  w  w  w  w  w  w (w)[X][X](w) w  w  w  w 
+ w  w  w  w  w  w  w (w)(g)(g) g  g (g) B (g)(g)[g][g][g](w)(w)(w)(w)(w)(w) w  w  w  w  w  w  w (w)[X](w) w  w  w  w  w 
+ w  w  w  w  g  g (g)[g][g][g](f)(f)[f][X][f][f][g][g][g][g][g][g][g][g][g](w)(w)(w)(w)(w)(w)(w)(w)[X](w) w  w  w  w  w 
+ w  w  g  g  g  g (f)[f][f][f][f][f][f][X][f][f][f][f][f][f][g][g][g][g][g][g][g][g][g][g][g][g][X][X][g](w)(w)(w)(w)(w)
+ w  g  g  g  f (f)[f][r][r][r][r][r][r][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][X][g][g][g][g][g][g][g]
+
+
+----- BFS -----
+
+File: ./boards/board-1-1.txt
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.](.)
+[.][.][.][.][.][.][.][.][X][X][X][X][X][X][X][X][X][X][.][.]
+[.][.][.][.][.][.][.][.][X] #  #  #  #  #  # [.][.][X][.](.)
+[.][.][.][.][.][.][.][.][X][X][X] A [.][.] # [.][.] B (.) . 
+[.][.][.][.][.][.][.][.][.] #  #  #  #  #  # [.][.][.](.) . 
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.](.)
+[.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.][.](.) . 
+
+
+File: ./boards/board-1-4.txt
+ A [X] # [.][.](.) .  .  .  .  #  .  .  .  .  .  .  #  .  . 
+ # [X] # [.] #  #  #  #  #  .  #  .  #  #  #  #  .  #  .  . 
+[X][X] # [X][X][X][X][X] #  .  #  .  .  .  .  #  .  .  .  . 
+[X] #  # [X] #  #  # [X] #  #  #  #  #  #  .  #  #  #  #  # 
+[X][X] # [X] B  # [X][X] # [.][.][.][.] #  .  .  .  #  .  . 
+ # [X] #  #  #  # [X] #  # [.] #  # [.] #  .  #  .  #  #  . 
+[.][X][X][X][X][X][X][.][.][.][.] # [.][.](.) #  .  .  .  . 
+
+
+File: ./boards/board-2-4.txt
+ w  w  w  w  w  g  g  g  g  g (g)[g][g][g][g][g][g][g](g) g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  g  r  r  r  r  r 
+ w  w  w  w  w  w  w  g  g (g)[g][g][g][g][g][g][g][g][g](g) g  g  g  g  g  g  g  g  w  w  w  w  w  g  r  r  g  g  g  g 
+ w  w  w  w  w  w  w  w (w)[w][w][g][g][X] A [g][g][g][g](g) g  g  w  w  w  w  w  w  w  w  w  w  w  w  r  w  g  g  g  g 
+ w  w  w  w  w  w  w  w  w (w)[w][w][w][X][w][w][w][w](w) w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  r  w  w  w  w  w 
+ w  w  w  w  w  w  w  w  w  w (w)[w][w][X][w][w][w](w) w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  r  w  w  w  w  w 
+ w  w  w  w  w  w  w  w  w  w  w (w)[w][X][w][w](w) w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  w  r  r  w  w  w  w  w 
+ w  w  w  w  w  w  w  w  g  g  g  g (g) B [g](g) g  g  g  w  w  w  w  w  w  w  w  w  w  w  w  w  w  r  w  w  w  w  w  w 
+ w  w  w  w  g  g  g  g  g  g  f  f  f  f (f) f  g  g  g  g  g  g  g  g  g  w  w  w  w  w  w  w  w  r  w  w  w  w  w  w 
+ w  w  g  g  g  g  f  f  f  f  f  f  f  f  f  f  f  f  f  f  g  g  g  g  g  g  g  g  g  g  g  g  r  r  g  w  w  w  w  w 
+ w  g  g  g  f  f  f  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  r  g  g  g  g  g  g  g 
+
