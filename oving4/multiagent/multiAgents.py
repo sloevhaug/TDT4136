@@ -110,6 +110,31 @@ class MinimaxAgent(MultiAgentSearchAgent):
     """
       Your minimax agent (question 2)
     """
+    def miniMax(self, gameState, depth, agentIndex):
+        if (depth == 0 or gameState.isWin() or gameState.isLose()):
+            return self.evaluationFunction(gameState);
+
+        if agentIndex == 0: #Packmans turn
+            bestValue = -float("inf");
+            
+            for action in gameState.getLegalActions(0):
+                #print("Agent in max: " + str(agentIndex))
+                successor = gameState.generateSuccessor(0, action);
+                value = self.miniMax(successor, depth, agentIndex + 1);
+                bestValue = max(bestValue, value)
+            
+            return bestValue;
+
+        else: #Ghostly turn
+            bestValue = float("inf");
+            nextAgent = (agentIndex + 1) % gameState.getNumAgents();
+            ##print("Current agent: " + str(agentIndex) + " NExt agent: " + str(nextAgent))
+            nextDepth = depth - 1 if nextAgent == 0 else depth;
+  
+            for action in gameState.getLegalActions(agentIndex):
+                value = self.miniMax(gameState.generateSuccessor(agentIndex, action), nextDepth, nextAgent);
+                bestValue = min(bestValue, value);
+            return bestValue;
 
     def getAction(self, gameState):
         """
@@ -128,20 +153,77 @@ class MinimaxAgent(MultiAgentSearchAgent):
           gameState.getNumAgents():
             Returns the total number of agents in the game
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        '''*** YOUR CODE HERE'''
+        
+        value = -float("inf");
+  
+        for action in gameState.getLegalActions(0):
+            
+            successor = gameState.generateSuccessor(0, action);
+            tempValue = value;
+
+            value = max(value, self.miniMax(successor, self.depth, 1));
+            
+            if(value > tempValue):
+                bestAction = action;
+
+        return bestAction; 
+        
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
       Your minimax agent with alpha-beta pruning (question 3)
     """
+    def alphaBeta(self, gameState, depth, agentIndex, alpha, beta):
+        if (depth == 0 or gameState.isWin() or gameState.isLose()):
+            return self.evaluationFunction(gameState);
+
+        if agentIndex == 0: #Packmans turn
+            value = -float("inf");
+            
+            for action in gameState.getLegalActions(0):
+                successor = gameState.generateSuccessor(0, action);
+                value = max(value, self.alphaBeta(successor, depth, agentIndex + 1, alpha, beta));
+
+                if (value > beta):
+                    return value;
+
+                alpha = max(alpha, value);
+            return value;
+
+        else: #Ghostly turn
+            value = float("inf");
+            nextAgent = (agentIndex + 1) % gameState.getNumAgents();
+            nextDepth = depth - 1 if nextAgent == 0 else depth;
+  
+            for action in gameState.getLegalActions(agentIndex):
+                value = min(value, self.alphaBeta(gameState.generateSuccessor(agentIndex, action), nextDepth, nextAgent, alpha, beta));
+                if (value < alpha):
+                    return value;
+                beta = min(beta, value);
+            return value;  
 
     def getAction(self, gameState):
         """
           Returns the minimax action using self.depth and self.evaluationFunction
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+
+        value = -float("inf");
+        alpha = -float("inf");
+        beta = float("inf");
+
+        for action in gameState.getLegalActions(0):
+            successor = gameState.generateSuccessor(0, action);
+            value = max(value, self.alphaBeta(successor, self.depth, 1, alpha, beta));
+            
+            if(value > beta):
+                return action;
+            elif(alpha < value):
+                alpha = value;
+                bestAction = action;
+
+        return bestAction; 
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
     """
