@@ -118,7 +118,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
             bestValue = -float("inf");
             
             for action in gameState.getLegalActions(0):
-                #print("Agent in max: " + str(agentIndex))
                 successor = gameState.generateSuccessor(0, action);
                 value = self.miniMax(successor, depth, agentIndex + 1);
                 bestValue = max(bestValue, value)
@@ -128,7 +127,6 @@ class MinimaxAgent(MultiAgentSearchAgent):
         else: #Ghostly turn
             bestValue = float("inf");
             nextAgent = (agentIndex + 1) % gameState.getNumAgents();
-            ##print("Current agent: " + str(agentIndex) + " NExt agent: " + str(nextAgent))
             nextDepth = depth - 1 if nextAgent == 0 else depth;
   
             for action in gameState.getLegalActions(agentIndex):
@@ -158,10 +156,8 @@ class MinimaxAgent(MultiAgentSearchAgent):
         value = -float("inf");
   
         for action in gameState.getLegalActions(0):
-            
             successor = gameState.generateSuccessor(0, action);
             tempValue = value;
-
             value = max(value, self.miniMax(successor, self.depth, 1));
             
             if(value > tempValue):
