@@ -15,6 +15,8 @@ class CSP:
         # the variable pair (i, j)
         self.constraints = {}
 
+        # self.number_backtracks and backtrack_fails are used for counting the number of
+        # times we backtrack and number of times the backtrack fails.
         self.number_backtracks = 0;
         self.number_backtrack_fails = 0;
 
@@ -114,21 +116,30 @@ class CSP:
         """
         # TODO: IMPLEMENT THIS
 
+        #Counting number of backtracks
         self.number_backtracks += 1;
 
+        #Checking to see if the assignment is finished.
         if all(len(assignment[x]) == 1 for x in assignment):
             return assignment;
 
+        #Retrieve next unfinished node
         variable = self.select_unassigned_variable(assignment);
 
+
         for x in assignment[variable]:
+            #Deep copy the assignment.
             assignmentCopy = copy.deepcopy(assignment);
             assignmentCopy[variable] = x;
+
+            #Use inference to see if any values can be placed with the new information.
             if self.inference(assignmentCopy, self.get_all_arcs()):
+                #Recursive call to continue building the copied assignment.
                 result = self.backtrack(assignmentCopy);
                 if result:
                     return result;
         
+        #Counting number of backtrack fails. 
         self.number_backtrack_fails += 1;
         return None;
 
@@ -140,13 +151,15 @@ class CSP:
         """
         # TODO: IMPLEMENT THIS
         
-        whatever = [];
+        temp = [];
         
         for x in assignment.items():
+            #Finding items with length over 1
             if len(x[1]) > 1:
-                whatever.append(x);
+                temp.append(x);
 
-        return min(whatever, key = lambda x: len(x[1]))[0];
+        # Returning the item with the lowest value, this because it may increase performance in some cases.
+        return min(temp, key = lambda x: len(x[1]))[0];
 
     def inference(self, assignment, queue):
         """The function 'AC-3' from the pseudocode in the textbook.
@@ -155,12 +168,17 @@ class CSP:
         is the initial queue of arcs that should be visited.
         """
         # TODO: IMPLEMENT THIS
+        # While there are arcs in the queue.
         while queue:
+            # Popping the first element in the queue.
             (i,j) = queue.pop(0);
+            # Tries to revise the current node
             if self.revise(assignment, i, j):
+                # No legal values returnes false
                 if not assignment[i]: 
                     return False;
                 neighbours = self.get_all_neighboring_arcs(i)
+                # Iterate through neighbour arcs and extending the queue if they should be visited.
                 if j in neighbours:
                     neighbours.remove(j);
                 queue.extend(neighbours);
@@ -177,14 +195,19 @@ class CSP:
         """
         # TODO: IMPLEMENT THIS
         constraint = self.constraints;
+        # Revised is false by default
         revised = False;
+        # Iterate through legal values in the domain.
         for x in assignment[i]:
             for y in assignment[j]:
+                # Checking to see if there exist a legal value pair in the constraints.
                 if (x,y) in constraint[i][j]:
                     break;
             else: 
+                # If no legal value pair is found we remove x from the domain of i.
                 revised = True;
                 assignment[i].remove(x);
+
         return revised;
 
 def create_map_coloring_csp():
@@ -247,8 +270,12 @@ def print_sudoku_solution(solution):
             print '------+-------+------'
 
 
+# Creating a new cps
 cps = create_sudoku_csp('./sudokus/superhard.txt');
+# Starting the backtrack search
 solution = cps.backtracking_search();
+# Printing solution
 print_sudoku_solution(solution);
+# Printing number of backtracks and backtrack fails.
 print("Number of backtracks: " + str(cps.number_backtracks) + "\nNumber of backtrackfails: " + str(cps.number_backtrack_fails));
 
